@@ -55,7 +55,6 @@ void delete_ammo(int x, int y)
 {
 	gotoxy(x += 2, --y); setcolor(0, 0); printf(" ");
 }
-
 int main()
 {
 	setcursor(0);
@@ -65,7 +64,7 @@ int main()
 	srand(time(NULL));
 
 	do {
-		gotoxy(90, 2); setcolor(2, 0); printf("Score = %d", score);
+		gotoxy(90, 2); setcolor(10, 0); printf("Score = %d", score);
 		for (; countStar < 20; countStar++)
 		{
 			if (countStar == 0)
