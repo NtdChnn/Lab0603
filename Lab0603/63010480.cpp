@@ -62,15 +62,11 @@ int main()
 	draw_ship(xShip, yShip);
 	char ch = '.';
 	srand(time(NULL));
-
 	do {
 		gotoxy(90, 2); setcolor(10, 0); printf("Score = %d", score);
 		for (; countStar < 20; countStar++)
 		{
-			if (countStar == 0)
-			{
-				xstar[countStar] = (rand() % 61) + 9;	ystar[countStar] = (rand() % 5) + 1;
-			}
+			if (countStar == 0) {xstar[countStar] = (rand() % 61) + 9;	ystar[countStar] = (rand() % 5) + 1;}
 			for (int checkStars = 0; checkStars < countStar; checkStars++)
 				do {
 					xstar[countStar] = (rand() % 61) + 9;
@@ -88,9 +84,7 @@ int main()
 		}
 		if (ammo == 1 && yAmmo > 0) { delete_ammo(xAmmo, yAmmo); draw_ammo(xAmmo, --yAmmo); }
 		if (cursor(xAmmo + 2, yAmmo - 2) == '*')
-		{
-			delete_ammo(xAmmo, yAmmo); delete_star(xAmmo + 2, yAmmo - 2); countStar--; score++; yAmmo = yShip; ammo = 0; Beep(2000, 100);
-		}
+		{delete_ammo(xAmmo, yAmmo); delete_star(xAmmo + 2, yAmmo - 2); countStar--; score++; yAmmo = yShip; ammo = 0; Beep(2000, 100);}
 		if (yAmmo == 1) { delete_ammo(xAmmo, yAmmo); ammo = 0; yAmmo = yShip; }
 		Sleep(100);
 	} while (ch != 'x');
