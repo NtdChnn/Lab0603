@@ -58,7 +58,7 @@ void delete_ammo(int x, int y)
 int main()
 {
 	setcursor(0);
-	int xShip = 38, xAmmo = 38, yShip = 20, yAmmo = 20, ammo = 0, xstar[20], ystar[20], countStar = 0, score = 0;
+	int xShip = 38, xAmmo = 38, yShip = 20, yAmmo = 20, ammo = 0, xstar[20], ystar[20], countStar = 0, score = 0, moving = 0;
 	draw_ship(xShip, yShip);
 	char ch = '.';
 	srand(time(NULL));
@@ -78,10 +78,13 @@ int main()
 		if (_kbhit()) {
 			fflush(stdin);
 			ch = _getch();
-			if (ch == 'a') { delete_ship(xShip, yShip); draw_ship(--xShip, yShip); }
-			if (ch == 's') { delete_ship(xShip, yShip); draw_ship(++xShip, yShip); }
+			if (ch == 'a') { moving = 1; }
+			if (ch == 'd') { moving = 2; }
+			if (ch == 's') { moving = 0; }
 			if (ch == ' ') { ammo = 1; }
 		}
+		if (moving == 1 && xShip > 0) { delete_ship(xShip, yShip); draw_ship(--xShip, yShip); }
+		if (moving == 2 && xShip < 75) { delete_ship(xShip, yShip); draw_ship(++xShip, yShip); }
 		if (ammo == 1 && yAmmo > 0) { delete_ammo(xAmmo, yAmmo); draw_ammo(xAmmo, --yAmmo); }
 		if (cursor(xAmmo + 2, yAmmo - 2) == '*')
 		{delete_ammo(xAmmo, yAmmo); delete_star(xAmmo + 2, yAmmo - 2); countStar--; score++; yAmmo = yShip; ammo = 0; Beep(2000, 100);}
